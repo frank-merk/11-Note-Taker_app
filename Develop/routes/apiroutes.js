@@ -25,17 +25,30 @@ module.exports = function (app) {
     //     status: $("#status").val().trim()
     // };
 
-    app.post("/api/stores", function (req, res) {
+    app.post("/api/notes", "/api/notes", function (req, res) {
+        fs.readFile(dataPath, "utf-8", function (err, data) {
+            if (err) {
+                console.log("Sorry, and error occurred. Please try again");
+            } else {
+                var notes = JSON.parse(data);
+                res.json(notes);
+            }
+                let createNote = req.body;
+                createNote.id = uuidv4();
+                notes.push(createNote);
 
-        storeData.push(req.body);
-        res.json(true);
+                fs. writeFile(dataPath, JSON.stringify(notes), "utf-8", function (err) {
+                    if (err) {
+                        console.log("Sorry, an error occurred and your note was not created");
+                    } else {
+                        res.json(notes);
+                        return;
+                    }
+                })
 
+        });
     });
 
-    // var storeUpdate = {
-    //     storeID: storeID,
-    //     status: status
-    // };
 
     app.post("/api/storeupdate", function (req, res) {
 
