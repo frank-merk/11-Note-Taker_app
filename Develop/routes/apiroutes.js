@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const dataPath = path.join(__dirname, "../db/db.json");
 const uuid = require("uuid");
+// we need access to this json file when we do our splice in the delete
 const noteArray = require("../db/db");
 
 // doing our app export for server routing
@@ -50,5 +51,20 @@ module.exports = function (app) {
             })
         });
     });
+       // delete functionality using the splice method. Credit to Lita Beach who shared this solution option in the Bootcamp Slack channel
+       app.delete("/api/notes/:id", function (req, res) {
+        // we want to take the id of the note we want to delete
+        var noteId = req.params.id
+        // looping through to find a matching note id
+        for (i = 0; i < noteArray.length; i++){
+            if (noteArray[i].id === noteId) {
+                noteArray.splice(i, 1);
+            }
+        }
+        // updating the main note filesystem and returning it to user
+        fs.writeFileSync((dataPath), JSON.stringify(noteArray));
 
+        res.json(req.body);
+
+    });
 }
