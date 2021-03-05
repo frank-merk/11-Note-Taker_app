@@ -55,7 +55,8 @@ module.exports = function (app) {
        app.delete("/api/notes/:id", function (req, res) {
         // we want to take the id of the note we want to delete
         var noteId = req.params.id
-        // looping through to find a matching note id
+        // looping through to find a matching note id in the json array
+        const noteArray = 
         for (i = 0; i < noteArray.length; i++){
             if (noteArray[i].id === noteId) {
                 noteArray.splice(i, 1);
