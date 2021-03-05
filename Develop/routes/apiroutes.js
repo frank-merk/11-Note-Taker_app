@@ -46,28 +46,7 @@ module.exports = function (app) {
     });
 
 
-    app.post("/api/storeupdate", function (req, res) {
-
-        var storeUpdate = req.body;
-        //we need to get the correct object
-        for (var i = 0; i < storeData.length; i++) {
-            console.log(storeData[i].storeID, storeUpdate.storeID)
-            if (storeData[i].storeID == storeUpdate.storeID) {
-
-                storeData[i].status = (storeData[i].status === 'open') ? 'closed' : 'open';
-
-                break; //Stop this loop, we found it!
-            }
-
-        }
-
-
-        res.json(true);
-
-
-
+    app.delete("/api/notes/:id", function (req, res) {
 
     });
-
-
 };
