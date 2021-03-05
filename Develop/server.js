@@ -27,10 +27,10 @@ app.use(express.static('public'));
 //ROUTES
 
 //API 
-require("./routes/apiRoutes")(app);
+require("./routes/apiroutes")(app);
 
 // HTML 
-require("./routes/htmlRoutes")(app);
+require("./routes/htmlroutes")(app);
 
 
 
