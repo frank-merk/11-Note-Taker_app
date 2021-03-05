@@ -5,8 +5,17 @@ const dataPath = path.join(_dirname, "../db/dbjson");
 const uuid = require("uuid");
 module.exports = function (app) {
     app.get("/api/notes", function (req, res) {
-        res.json(storeData)
+        fs.readFile(dataPath, "utf-8", function (err, data) {
+            if (err) {
+                console.log("Sorry, and error occurred. Please try again");
+            } else {
+                var notes = JSON.parse(data);
+                res.json(notes);
+            }
+
+        });
     });
+    
 
 
     // var newStore = {
