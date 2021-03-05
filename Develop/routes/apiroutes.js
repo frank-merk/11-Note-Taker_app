@@ -1,13 +1,10 @@
 
 const fs = require('fs');
 const path = require('path');
-const dataPath = path.join(_dirname, "../db/dbjson")
-
-//Special place to store data
-var storeData = require("../data/storeData");
-
+const dataPath = path.join(_dirname, "../db/dbjson");
+const uuid = require("uuid");
 module.exports = function (app) {
-    app.get("/api/stores", function (req, res) {
+    app.get("/api/notes", function (req, res) {
         res.json(storeData)
     });
 
