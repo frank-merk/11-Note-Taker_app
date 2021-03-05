@@ -1,4 +1,8 @@
 
+const fs = require('fs');
+const path = require('path');
+const dataPath = path.join(_dirname, "../db/dbjson")
+
 //Special place to store data
 var storeData = require("../data/storeData");
 
