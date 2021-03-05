@@ -45,8 +45,21 @@ module.exports = function (app) {
         });
     });
 
-
+    // delete functionality using the splice method. Credit to Lita Beach who shared this solution option in the Bootcamp Slack channel
     app.delete("/api/notes/:id", function (req, res) {
+        // we want to take the id of the note we want to delete
+        var noteId = req.params.id
+        // looping through to find a matching note id
+        for (i = 0; i < notes.length; i++){
+            if (notes[i].id === noteId) {
+                notes.splice(i, 1);
+            }
+        }
+        // updating the main note filesystem and returning it to user
+        fs.writeFileSync(path.join(__dirname, "../db/dbjson"), JSON.stringify(notes));
+
+        res.json(req.body);
 
     });
 };
+
